@@ -1,0 +1,12 @@
+      buf
+      buildifier
+      delve
+      glow
+      gofumpt
+      goimports
+      goimports-reviser
+      gopls
+      gospel
+      isort
+      lua-language-server
+      stylua
