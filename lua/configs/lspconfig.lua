@@ -5,7 +5,7 @@ local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- LSP servers to be set up
-local servers = { "gopls", "protols", "html", "cssls" }
+local servers = { "gopls", "protols", "html", "cssls", "htmx" }
 
 -- Set up each LSP server with default configurations
 for _, lsp in ipairs(servers) do
@@ -71,18 +71,23 @@ lspconfig.html.setup {
       },
       hover = {
         documentation = true,
-        references = true,
       },
-      css = {
-        lint = {
-          validProperties = { "htmx-*" },
-        },
+      attributes = {
+        -- Support for htmx attributes like hx-*
+        ["hx-*"] = true,
       },
     },
   },
 }
 
--- Configure css-lsp for CSS files
+-- Configure htmx-lsp for HTML files
+lspconfig.htmx.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
+
+-- Set up CSS LSP for additional styling support with htmx attributes
 lspconfig.cssls.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
@@ -91,7 +96,7 @@ lspconfig.cssls.setup {
     css = {
       validate = true,
       lint = {
-        unknownAtRules = "ignore",
+        validProperties = { "htmx-*", "hx-ws", "hx-sse" }, -- Add htmx specific properties
       },
     },
   },
