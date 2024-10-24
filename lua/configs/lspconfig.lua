@@ -2,12 +2,12 @@
 require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
-
--- EXAMPLE
-local servers = { "gopls", "protols" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps withinh default config
+-- LSP servers to be set up
+local servers = { "gopls", "protols", "html", "cssls" }
+
+-- Set up each LSP server with default configurations
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = nvlsp.on_attach,
@@ -16,13 +16,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- configuring single server, example: typescript
--- lspconfig.tsserver.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
---
 -- Configure gopls with extended settings
 lspconfig.gopls.setup {
   on_attach = nvlsp.on_attach,
@@ -34,23 +27,23 @@ lspconfig.gopls.setup {
   settings = {
     gopls = {
       analyses = {
-        unreachable = true, -- Report unreachable code
-        nilness = true, -- Check for redundant or impossible nil comparisons
-        shadow = true, -- Detect shadowed variables
-        unusedparams = true, -- Find unused parameters
-        unusedwrite = true, -- Detect unused writes to variables
-        fieldalignment = true, -- Suggest optimizations for struct field alignment
-        nonewvars = true, -- Highlight variables that could be redeclared
-        useany = true, -- Flag unnecessary uses of the "any" type
+        unreachable = true,
+        nilness = true,
+        shadow = true,
+        unusedparams = true,
+        unusedwrite = true,
+        fieldalignment = true,
+        nonewvars = true,
+        useany = true,
       },
-      staticcheck = true, -- Enable static analysis checks
-      gofumpt = true, -- Use gofumpt for formatting
-      usePlaceholders = true, -- Use placeholders for function signatures
-      completeUnimported = true, -- Autocomplete unimported packages
+      staticcheck = true,
+      gofumpt = true,
+      usePlaceholders = true,
+      completeUnimported = true,
       codelenses = {
-        generate = true, -- Enable the `go generate` lens
-        gc_details = true, -- Enable the `go gc` lens
-        tidy = true, -- Enable the `go mod tidy` lens
+        generate = true,
+        gc_details = true,
+        tidy = true,
       },
     },
   },
@@ -61,7 +54,45 @@ lspconfig.protols.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-  cmd = { "protols" }, -- Ensures protols command is used
-  filetypes = { "proto" }, -- .proto files
-  root_dir = lspconfig.util.root_pattern ".proto", -- Set root directory for proto files
+  cmd = { "protols" },
+  filetypes = { "proto" },
+  root_dir = lspconfig.util.root_pattern ".proto",
+}
+
+-- Configure html-lsp for HTML files with htmx support
+lspconfig.html.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    html = {
+      format = {
+        enable = true,
+      },
+      hover = {
+        documentation = true,
+        references = true,
+      },
+      css = {
+        lint = {
+          validProperties = { "htmx-*" },
+        },
+      },
+    },
+  },
+}
+
+-- Configure css-lsp for CSS files
+lspconfig.cssls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    css = {
+      validate = true,
+      lint = {
+        unknownAtRules = "ignore",
+      },
+    },
+  },
 }
