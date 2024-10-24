@@ -1,5 +1,30 @@
 return {
   {
+    "nvim-lua/plenary.nvim",
+
+    {
+      "nvchad/ui",
+      config = function()
+        require "nvchad"
+      end,
+    },
+
+    {
+      "nvchad/base46",
+      lazy = true,
+      build = function()
+        require("base46").load_all_highlights()
+      end,
+    },
+
+    "nvchad/volt", -- optional, needed for theme switcher
+
+    "edluffy/hologram.nvim",
+    config = function()
+      require("hologram").setup { auto_display = true }
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
