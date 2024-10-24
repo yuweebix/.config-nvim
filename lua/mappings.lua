@@ -52,3 +52,17 @@ end, { desc = "Debug go test" })
 map("n", "<leader>dgl", function()
   require("dap-go").debug_last()
 end, { desc = "Debug last go test" })
+
+-- Mapping delete commands to the blackhole register
+map({ "n", "v" }, "d", '"_d')
+map({ "n", "v" }, "D", '"_D')
+map({ "n", "v" }, "dd", '"_dd')
+
+-- Mapping change commands to the blackhole register
+map({ "n", "v" }, "c", '"_c')
+map({ "n", "v" }, "C", '"_C')
+map({ "n", "v" }, "cc", '"_cc')
+
+-- Mapping other change and delete related commands
+map({ "n", "v" }, "x", '"_x')
+map({ "n", "v" }, "X", '"_X')
