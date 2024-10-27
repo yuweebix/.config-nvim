@@ -72,3 +72,6 @@ map({ "n", "v" }, "cc", '"_cc')
 -- Mapping other change and delete related commands
 map({ "n", "v" }, "x", '"_x')
 map({ "n", "v" }, "X", '"_X')
+
+map("n", "<leader>tn", ":tabnew<CR>")
+map("n", "<leader>tq", ":tabclose<CR>")
