@@ -15,6 +15,12 @@ map("i", "<C-j>", "<Left>", { desc = "Move left" })
 map("i", "<C-k>", "<Down>", { desc = "Move down" })
 map("i", "<C-l>", "<Right>", { desc = "Move right" })
 
+-- Window split navigation with <C-i>, <C-j>, <C-k>, <C-l>
+map("n", "<C-i>", "<C-w>k", { desc = "Window up" })
+map("n", "<C-j>", "<C-w>h", { desc = "Window left" })
+map("n", "<C-k>", "<C-w>j", { desc = "Window down" })
+map("n", "<C-l>", "<C-w>l", { desc = "Window right" })
+
 -- Additional insert mode navigation keys
 map("i", "<C-h>", "<Home>", { desc = "Move to the beginning of the line" })
 
@@ -23,7 +29,7 @@ map("n", "h", "i", { desc = "Enter insert mode" })
 map("n", "H", "I", { desc = "Move to the front of the line" })
 
 -- CMD enter command mode
-map("n", ";", ":", { desc = "Enter command mode" })
+-- map("n", ";", ":", { desc = "Enter command mode" })
 
 -- Escaping insert mode with 'jk'
 map("i", "jk", "<ESC>")
