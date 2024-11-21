@@ -75,6 +75,7 @@ return {
         "lua",
         "go",
         "proto",
+        "templ",
       },
     },
   },

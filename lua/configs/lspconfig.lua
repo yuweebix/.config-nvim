@@ -5,7 +5,7 @@ local lspconfig = require "lspconfig"
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- LSP servers to be set up
-local servers = { "gopls", "protols", "html", "cssls", "htmx" }
+local servers = { "gopls", "protols", "templ", "html", "tailwindcss", "htmx" }
 
 -- Set up each LSP server with default configurations
 for _, lsp in ipairs(servers) do
@@ -59,45 +59,33 @@ lspconfig.protols.setup {
   root_dir = lspconfig.util.root_pattern ".proto",
 }
 
--- Configure html-lsp for HTML files with htmx support
+lspconfig.templ.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  filetypes = { "templ" },
+  root_dir = function(fname)
+    return lspconfig.util.root_pattern ".git"(fname) or lspconfig.util.path.dirname(fname)
+  end,
+}
+
+lspconfig.tailwindcss.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  filetypes = { "html", "templ", "css" },
+}
+
 lspconfig.html.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-  settings = {
-    html = {
-      format = {
-        enable = true,
-      },
-      hover = {
-        documentation = true,
-      },
-      attributes = {
-        -- Support for htmx attributes like hx-*
-        ["hx-*"] = true,
-      },
-    },
-  },
+  filetypes = { "html", "templ" },
 }
 
--- Configure htmx-lsp for HTML files
 lspconfig.htmx.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-}
-
--- Set up CSS LSP for additional styling support with htmx attributes
-lspconfig.cssls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  settings = {
-    css = {
-      validate = true,
-      lint = {
-        validProperties = { "htmx-*", "hx-ws", "hx-sse" }, -- Add htmx specific properties
-      },
-    },
-  },
+  filetypes = { "html", "templ" },
 }

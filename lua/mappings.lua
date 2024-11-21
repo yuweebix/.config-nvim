@@ -42,9 +42,9 @@ nomap({ "n", "t" }, "<A-i>")
 
 -- DAP mappings
 map("n", "<leader>dp", "<cmd> DapToggleBreakpoint <CR>", { desc = "Add breakpoint at line" })
-map("n", "<leader>dni", "<cmd> DapStepOver <CR>", { desc = "Dap Step Over" })
-map("n", "<leader>dno", "<cmd> DapStepInto <CR>", { desc = "Dap Step Into" })
-map("n", "<leader>dnu", "<cmd> DapStepOut <CR>", { desc = "Dap Ste Out" })
+map("n", "<leader>dno", "<cmd> DapStepOver <CR>", { desc = "Dap Step Over" })
+map("n", "<leader>dni", "<cmd> DapStepInto <CR>", { desc = "Dap Step Into" })
+map("n", "<leader>dnu", "<cmd> DapStepOut <CR>", { desc = "Dap Step Out" })
 map("n", "<leader>dus", function()
   local widgets = require "dap.ui.widgets"
   local sidebar = widgets.sidebar(widgets.scopes)
