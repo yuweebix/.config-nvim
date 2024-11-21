@@ -76,3 +76,5 @@ map("n", "<leader>tn", ":tabnew<CR>")
 map("n", "<leader>tq", ":tabclose<CR>")
 map("n", "<leader>j", ":tabprevious<CR>")
 map("n", "<leader>l", ":tabnext<CR>")
+
+map("t", "jk", "<C-\\><C-n>")
