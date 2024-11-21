@@ -60,18 +60,17 @@ map("n", "<leader>dgl", function()
 end, { desc = "Debug last go test" })
 
 -- Mapping delete commands to the blackhole register
-map({ "n", "v" }, "d", '"_d')
-map({ "n", "v" }, "D", '"_D')
-map({ "n", "v" }, "dd", '"_dd')
+map({ "n", "v" }, "d", '"_d', { noremap = true })
+map({ "n", "v" }, "D", '"_D', { noremap = true })
+
+-- Mapping x to establish "cut" commands
+map({ "n", "v" }, "x", "d", { noremap = true })
+map({ "n", "v" }, "X", "D", { noremap = true })
 
 -- Mapping change commands to the blackhole register
-map({ "n", "v" }, "c", '"_c')
-map({ "n", "v" }, "C", '"_C')
-map({ "n", "v" }, "cc", '"_cc')
-
--- Mapping other change and delete related commands
-map({ "n", "v" }, "x", '"_x')
-map({ "n", "v" }, "X", '"_X')
+map({ "n", "v" }, "c", '"_c', { noremap = true })
+map({ "n", "v" }, "C", '"_C', { noremap = true })
+map({ "n", "v" }, "cc", '"_cc', { noremap = true })
 
 map("n", "<leader>tn", ":tabnew<CR>")
 map("n", "<leader>tq", ":tabclose<CR>")
