@@ -78,3 +78,4 @@ map("n", "<leader>j", ":tabprevious<CR>")
 map("n", "<leader>l", ":tabnext<CR>")
 
 map("t", "jk", "<C-\\><C-n>")
+map("t", "<ESC>", "<C-\\><C-n>")
