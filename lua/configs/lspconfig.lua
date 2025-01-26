@@ -32,7 +32,6 @@ lspconfig.gopls.setup {
         shadow = true,
         unusedparams = true,
         unusedwrite = true,
-        fieldalignment = true,
         nonewvars = true,
         useany = true,
       },
